@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anybody:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDGothic&display=swap');
+
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow: hidden;
+} 
+.header{
+    height: 13%;
+    background-color: rgb(32, 32, 32);
+    display: flex;
+    align-items: center;
+}
+.logo{
+    transition: all 0.6s;
+    text-align: center;
+    width: 20%;
+    height: 80%;
+    font-size: 42px;
+    cursor: pointer;
+    font-family: 'Shadows Into Light';
+    padding: 3px;
+    font-weight: bold;
+    color: #7dd777;
+    border-right: 2px solid rgb(77, 76, 76);
+}
+.logo:hover{
+    color: #ffffba;
+}
+ul{
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+li{
+    list-style-type: none;
+    transition: all 0.3s;
+    font-family: 'Barlow';
+    font-size: 32px;
+    color:  darkgray;
+    cursor: pointer;
+}
+li:hover{
+    color: #ffb3ba;
+    font-size: 36px;
+}
+
+
+.content-container{
+    height: 100%;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+}
+.sidebar{
+    width: 20.6%;
+    background-color: #579ABE;
+    height: 100%;
+    box-shadow: 7px 0 5px -1px  gray;
+    color: #EADA52;
+}
+.grouptitle-container{
+    width: 80%;
+    font-size: 32px;
+    display: flex;
+    margin-left: 10%;
+    padding-top: 10px;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #7dd777;
+}
+.add-group-btn{
+    color: #F39A27;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+.add-group-btn:hover .tooltip{
+   display: block;
+}
+.add-group-btn:hover{
+    color: rgb(145, 255, 0);
+ }
+.group-container{
+    width: 80%;
+    display: flex;
+    margin-left: 10%;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.remove-group-btn{
+    transition:all 0.5s;
+    font-family: 'Montserrat';
+    font-size: 32px;
+    color: red;
+    font-weight: 700;
+    cursor: pointer;
+}
+.remove-group-btn:hover{
+    color: black;
+}
+.group-title1{
+    transition: all 0.8s;
+    color: black;
+    font-family: 'roboto condensed';
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+    align-self: center;
+    margin-right: 4px;
+  }
+
+
+.tasks-window{
+      overflow-y: scroll;
+      width: 79%;
+      background-color: whitesmoke;
+  }
+.task-header{
+      transition: all 0.8s;
+      display: flex;
+      background-color: whitesmoke;
+      font-family: 'anybody';
+      font-size: 32px;
+      align-items: center;
+      margin-top: 5%;
+      margin-left: 2%;
+      margin-right: 2%;
+      margin-bottom: 5px;
+      border-bottom: 2px solid #7dd777;
+      text-align: left;
+      cursor: default;
+      position: sticky;
+      top: 0;
+      cursor: default;
+  }
+  .task{
+    display: flex;
+    background-color: whitesmoke;
+    font-family: 'anybody';
+    font-size: 32px;
+    align-items: center;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #7dd777;
+    text-align: left;
+    cursor: default;
+    top: 0;
+  }
+.add-task-button{
+      transition: 0.3s;
+     padding-left: 7%;
+     padding-bottom: 15px;
+     cursor: pointer;
+  }
+.add-task-button:hover{
+      color: #7dd777;
+  }
+.add-task-button:hover .tooltip{
+    opacity: 1;
+}
+
+
+
+.add-task-form{
+    background-color: rgba(0, 0, 0, 0.642);
+    position: absolute;
+    height: 88.5%;
+    width: 100%;
+    opacity: 0;
+}
+.form{
+    color: #EADA52;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-family: 'biz udgothic';
+    padding-top: 12%;
+    margin-left: 18%;
+    font-size: 20px;
+}
+.add-note-button{
+    transition: all 0.2s;
+}
+.add-note-button:hover{
+    color: black;
+}
+.add-task{
+    transition: all 0.6s;
+    cursor: pointer;
+}
+.add-task{
+    color: yellowgreen;
+}
+.add-task:hover{
+    color: black;
+}
+.cancel-task{
+    transition: all 0.6s;
+    cursor: pointer;
+    color: tomato;
+}
+.cancel-task:hover{
+    color: black;
+}
+.due-date-button:hover{
+    color: black;
+}
+.tooltip{    
+    transition: all 0.5s;
+    display: block;
+    opacity: 0;
+      color: black;
+      font-size: 20px;
+      font-weight: 600;
+      border-radius: 20%;
+      font-family: 'anybody';
+      margin-left: -28px; /* moves the tooltip to the right */
+      margin-top: -5px; /* moves it down */
+      position: absolute;
+      z-index: 1000;
+  }
+  .hidden{
+      display: none;
+  }
+
+ 

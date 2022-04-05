@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./dist/main.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>My To-Do List</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">My To-Do List</div>
+        <ul>
+            <li>New Group</li>
+            <li style="text-align: center;">Tasks' Analytics</li>
+            <li>Github</li>
+        </ul>
+    </div>
+    <div class="content-container">
+    <div class="sidebar">
+        <div class="grouptitle-container">
+            <div style="font-family: 'roboto condensed';">GROUPS</div>
+            <div class="add-group-btn">+</div>
+        </div>
+        <div class="group-container">
+            <div class="group-title1 title"><span class="dot title"></span>Home Tasks</div>
+            <i class="material-icons remove-group-btn">close</i>
+        </div>
+    </div>
+    <div class="tasks-window">
+        <div class="task-header">
+            <div style="margin-right: 50px;">No.</div>
+            <div style="padding-right: 40%;">Task</div>
+            <div style="margin-left: 10px; padding-right: 10%;">Notes</div>
+            <div style="padding-right: 30px;">Due Date</div>
+            <div class="add-task-button" style="font-family: 'monaco';">+<span class="tooltip">Add Task</span></div>
+        </div>
+        <div style="font-size: 64px;">Test Task</div>
+    </div>
+    <div class="add-task-form hidden">
+        <div class="form" style="width: 80%;">
+            <div class="form-number" style="width: 8%; margin-left: 7%;">-</div>
+            <div style=" width: 44%; color: #7dd777;">Task: <input size="40" style="background-color: #7dd777; color: black; font-family: 'roboto condensed'; border: none; font-size: 17px; text-transform: capitalize;" class="task-name"></div>
+            <div class="add-note-button" style="cursor: pointer; width: 16%; margin-right: 2%;">Add Notes</div><input class="notes-input hidden" style="background-color: #579ABE; border: none; color: whitesmoke; font-size: 15px; width: 16%; margin-right: 2%;">
+            <div style="cursor: pointer; transition: all 0.4s; width: 13%;" class="due-date-button">Due Date</div><input class="date-selector hidden" style="width: 10%; margin-right: 3%;" type="date">
+            <div class="add-task" style="margin-right: 2%;">Add</div>
+            <div class="cancel-task">Cancel</div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
