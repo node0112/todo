@@ -89,7 +89,7 @@ li:hover{
 .add-group-btn:hover{
     color: rgb(145, 255, 0);
  }
-.group-container{
+.group-container,.group-form-container{
     width: 80%;
     display: flex;
     margin-left: 10%;
