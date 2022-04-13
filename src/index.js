@@ -86,15 +86,3 @@ addGroupBtn.addEventListener('click',createGroupForm)
 
 //add info to array{
 
-function createGroupArray(groupName){
-    window[groupName]= new Array()
-}
-
-class task{
-    constructor(taskNumber,taskName,notes,duedate){
-    this.taskNumber=taskNumber
-    this.taskName=taskName
-    this.notes=notes
-    this.duedate=duedate
-    }
-}

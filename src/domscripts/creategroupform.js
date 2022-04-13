@@ -1,4 +1,5 @@
 import { inputChecker } from '../logic/inputcheck'
+import { removeGroup } from './removeGroup'
 
 function createGroupForm(){
     const sidebar=document.querySelector('.sidebar')
@@ -65,7 +66,22 @@ function addInfo(){
     closeGroupForm()
     input.style.backgroundColor="#11ff00"
     let groupName=input.value
-    createGroupElement(groupName)
+    setTimeout(() => {
+        createGroupElement(groupName)
+    }, 500);
+}
+
+function createGroupArray(groupName){
+    window[groupName]= new Array()
+}
+
+class task{
+    constructor(taskNumber,taskName,notes,duedate){
+    this.taskNumber=taskNumber
+    this.taskName=taskName
+    this.notes=notes
+    this.duedate=duedate
+    }
 }
 
 function createGroupElement(groupName){
@@ -78,6 +94,7 @@ function createGroupElement(groupName){
     groupTitle.classList.add('group-title')
     groupTitle.classList.add('title')
     const str2 = groupName.charAt(0).toUpperCase() + groupName.slice(1);
+    container.classList.add(groupName)//for indentification when deleteing elment
     groupTitle.textContent= str2
 
     //Spawn Dot for title
@@ -101,5 +118,12 @@ function createGroupElement(groupName){
     container.appendChild(titleDot)
     container.appendChild(closeBtn)
     formContainer.appendChild(container)
+    closeBtn.addEventListener('click',()=>{
+        let name=groupTitle.textContent
+        removeGroup(name)
+    })
+
+    //create array
+    createGroupArray(groupName)
 }
 export { createGroupForm,closeGroupForm,addInfo }
