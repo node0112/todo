@@ -81,16 +81,15 @@ addTaskBtn.addEventListener('click',()=>{
 
 //create new group
 const addGroupBtn=document.querySelector('.add-group-btn')
-addGroupBtn.addEventListener('click',()=>{
-    createGroupForm()
-})
+addGroupBtn.addEventListener('click',createGroupForm)
 
 
 //add info to array{
 
-function createGroupArray(groupname){
-    let groupName = []
+function createGroupArray(groupName){
+    window[groupName]= new Array()
 }
+
 class task{
     constructor(taskNumber,taskName,notes,duedate){
     this.taskNumber=taskNumber

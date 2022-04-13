@@ -19,6 +19,9 @@ body{
     display: flex;
     align-items: center;
 }
+input{
+    text-transform: capitalize;
+}
 .logo{
     transition: all 0.6s;
     text-align: center;
@@ -66,7 +69,7 @@ li:hover{
     background-color: #579ABE;
     height: 100%;
     box-shadow: 7px 0 5px -1px  gray;
-    color: #EADA52;
+    
 }
 .grouptitle-container{
     width: 80%;
@@ -77,6 +80,7 @@ li:hover{
     justify-content: space-between;
     padding-bottom: 5px;
     border-bottom: 2px solid #7dd777;
+    color: #EADA52;
 }
 .add-group-btn{
     color: #F39A27;
@@ -89,13 +93,14 @@ li:hover{
 .add-group-btn:hover{
     color: rgb(145, 255, 0);
  }
-.group-container,.group-form-container{
+.group-container{
     width: 80%;
     display: flex;
     margin-left: 10%;
     margin-top: 10px;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.5s;
 }
 .remove-group-btn{
     transition:all 0.5s;
@@ -108,7 +113,7 @@ li:hover{
 .remove-group-btn:hover{
     color: black;
 }
-.group-title1{
+.title{
     transition: all 0.8s;
     color: black;
     font-family: 'roboto condensed';
@@ -244,4 +249,34 @@ li:hover{
       display: none;
   }
 
- 
+
+.group-form-container{
+    width: 80%;
+    display: flex;
+    margin-left: 10%;
+    margin-top: 10px;
+    align-items: center;
+    transition: all 0.5s;
+}
+.title-dot-container{
+    display: flex;
+}
+.remove-groupform-btn{
+    transition: all 0.4s;
+    color: red;
+}
+.remove-groupform-btn:hover{
+    color: black;
+}
+.remove-groupform-btn:hover{
+    transform: rotate(90deg);
+}
+.grpformadd{
+    transition: all 0.5s;
+    margin-left: 17.5%;
+    cursor: pointer;
+}
+.grpformadd:hover{
+    transform: rotate(-90deg);
+    color: #11ff00;
+}
