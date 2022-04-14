@@ -2,6 +2,7 @@ import { inputChecker } from '../logic/inputcheck'
 import { sendItem } from '../logic/sendItem'
 import { removeGroup } from './removeGroup'
 
+
 function createGroupForm(){
     const sidebar=document.querySelector('.sidebar')
     const formContainer=document.createElement('div')
@@ -10,6 +11,7 @@ function createGroupForm(){
     const addGroupBtn=document.createElement("i")
 
     formContainer.classList.add('group-form-container')
+    formContainer.style.width="130%"
     input.classList.add('group-name-input')
     closeBtn.classList.add("material-icons")
     closeBtn.classList.add('remove-groupform-btn')
@@ -26,7 +28,7 @@ function createGroupForm(){
     const dot=document.createElement('span')
     dot.classList.add('dot')
     dot.classList.add('title')
-    input.size="20"
+    input.size="15"
     input.fontSize=("24px")
     
     formContainer.style.opacity="0"
@@ -74,17 +76,8 @@ function addInfo(){
 
 function createGroupArray(groupName){
     window[groupName]= new Array()
-    window[groupName].push('f','u','c')
-    sendItem(window[groupName])
-}
-
-class task{
-    constructor(taskNumber,taskName,notes,duedate){
-    this.taskNumber=taskNumber
-    this.taskName=taskName
-    this.notes=notes
-    this.duedate=duedate
-    }
+    window[groupName]=({taskName: "complete chore",dateDue:"Nan"})
+    sendItem(window[groupName],groupName)
 }
 
 function createGroupElement(groupName){
@@ -94,7 +87,6 @@ function createGroupElement(groupName){
 
     //create group element and assign it a title number
     let groupTitle=document.createElement('div')
-    groupTitle.classList.add('group-title')
     groupTitle.classList.add('title')
     const str2 = groupName.charAt(0).toUpperCase() + groupName.slice(1);
     container.classList.add(groupName)//for indentification when deleteing elment
@@ -122,11 +114,42 @@ function createGroupElement(groupName){
     container.appendChild(closeBtn)
     formContainer.appendChild(container)
     closeBtn.addEventListener('click',()=>{
-        let name=groupTitle.textContent
-        removeGroup(name)
+        if(confirm("Are You Sure You Want to Delete The "+groupTitle.textContent+" Group?")==true){
+            let name=groupTitle.textContent
+            removeGroup(name)
+        }
     })
-
     //create array
     createGroupArray(groupName)
+    groupSelection()
+    groupSelector()
 }
-export { createGroupForm,closeGroupForm,addInfo }
+let groupSelected
+function groupSelector(){//checks which group is currently selected
+    let group=document.querySelectorAll('.title')
+    group.forEach(title=>{
+        title.addEventListener('click',()=>{
+            let groupname=title.textContent
+            groupname= groupname.charAt(0).toLowerCase() + groupname.slice(1);
+            groupSelected=groupname
+         })
+    })
+}
+groupSelector()
+function groupSelection(){
+    const groups=document.querySelectorAll('.title')
+    groups.forEach(item =>{
+            item.addEventListener('click',()=>{
+            groups.forEach(group =>{group.style.color="black"})//to reset selected group, if any
+            item.style.color="yellowgreen"
+            groupSelector(item)
+        })
+    })
+    }
+
+function addTaskToGroup(groupName,task){
+   array=window[groupName]
+   array.push(task)
+}
+
+export { createGroupForm,closeGroupForm,addInfo,groupSelected }

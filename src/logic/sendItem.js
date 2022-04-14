@@ -1,5 +1,5 @@
-function sendItem(groupname){//sets item to local storage
-   localStorage.setItem(groupname,'test')
+function sendItem(array,group){//sets item to local storage
+      localStorage.setItem(group, JSON.stringify(array));
 }
  
 export { sendItem }

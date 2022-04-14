@@ -1,5 +1,4 @@
 //import functions here;
-import {createnewtask} from './logic/newtask'
 import { openNewForm } from './domscripts/openForm'
 import { closeForm } from './logic/closeform'
 import { cancelTask } from './logic/canceltask'
@@ -9,6 +8,7 @@ import { inputChecker } from './logic/inputcheck'
 import { format,parseISO,subDays } from 'date-fns'
 import { createGroupForm, closeGroupForm } from './domscripts/creategroupform'
 import { sendItem } from './logic/sendItem'
+import { groupSelected } from './domscripts/creategroupform'
 
 const taskForm=document.querySelector('.add-task-form')
 const newNoted=document.querySelector(".add-note-button")
@@ -22,42 +22,18 @@ let notes
 let taskDate
 let taskNumber
 let duedate
+ 
 
 
-function addTask(){
-    if (inputChecker('.task-name')==true){
-    //extra animation effects
-    taskForm.style.backgroundColor="#7dd777"
-    taskForm.style.opacity="0"
-    captureInfo()
-    setTimeout(() => {
-        closeForm()
-    }, 800);
-}
-else if (inputChecker('.task-name')==false){
-    alert('Please Enter A Valid Class Name 👀')
-}
-}
 
-function captureInfo(){
-    taskName=document.querySelector('.task-name').value
-    notes=document.querySelector('.notes-input').value
-    taskDate=document.querySelector('.date-selector').value    
-    if(taskDate!=''){
-        daysCount()
+class task{
+    constructor(taskNumber,taskName,notes,duedate){
+    this.taskNumber=taskNumber
+    this.taskName=taskName
+    this.notes=notes
+    this.duedate=duedate
     }
 }
-function daysCount(){
-    taskDate=parseISO(taskDate,1)
-    taskDate=format(taskDate,'yyyy,MM,dd')
-    console.log(taskDate)
-    let date= new Date()
-    date = format(date, 'dd')
-    console.log(date)
-    let days= format((subDays(new Date(taskDate), date)),'dd')//<-- wrong logic here; works with days but crashes when months are added
-    console.log(days)
-}
-
 
 newTaskBtn.addEventListener('click',()=>{
    openNewForm()
@@ -79,10 +55,50 @@ addTaskBtn.addEventListener('click',()=>{
     addTask()
 })
 
+
+
 //create new group
 const addGroupBtn=document.querySelector('.add-group-btn')
-addGroupBtn.addEventListener('click',createGroupForm)
+addGroupBtn.addEventListener('click',()=>{
+    createGroupForm()
+})
 
 
-//add info to array{
+//<----------------Create new task Functions --------------->
 
+
+function addTask(){
+    if (inputChecker('.task-name')==true){
+    //extra animation effects
+    taskForm.style.backgroundColor="#7dd777"
+    taskForm.style.opacity="0"
+    captureInfo()
+    setTimeout(() => {
+        closeForm()
+    }, 800);
+}
+else if (inputChecker('.task-name')==false){
+    alert('Please Enter A Valid Class Name 👀')
+}
+}
+
+function captureInfo(){
+    taskName=document.querySelector('.task-name').value
+    notes=document.querySelector('.notes-input').value
+    if(notes==''){
+        notes="None"
+    }
+    taskDate=document.querySelector('.date-selector').value
+    createTask(groupSelected)
+}
+
+let Task
+function createTask(groupSelected){
+    taskNumber=window[groupSelected].length+2
+    if(taskNumber==2){
+        taskNumber=1
+    }
+     Task = new task(taskNumber,taskName,notes,duedate)
+     window[groupSelected].push(Task)
+
+}
