@@ -76,7 +76,7 @@ function addInfo(){
 
 function createGroupArray(groupName){
     window[groupName]= new Array()
-    window[groupName]=({taskName: "complete chore",dateDue:"Nan"})
+    window[groupName]=({taskName: "complete chore",dateDue:"Nan",notes:"hso"})
     sendItem(window[groupName],groupName)
 }
 

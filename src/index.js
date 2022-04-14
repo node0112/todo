@@ -102,3 +102,19 @@ function createTask(groupSelected){
      window[groupSelected].push(Task)
 
 }
+
+//<--------------on start functions here------------>
+
+function pageLoad(){//gets groups from localstorage and creates new arrays
+     let ln=localStorage.length
+     let groupName
+     for(let i=0;i<ln;i++){
+         groupName=localStorage.key(i)
+         console.log(groupName)
+         let array=window[groupName]=new Array()//create array for each group stored in local storge
+         let tasks=JSON.parse(localStorage.getItem(groupName))//to get tasks for particular group
+         array.push(tasks)
+         console.log(array)
+     }  
+}
+pageLoad()
