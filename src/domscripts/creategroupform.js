@@ -1,4 +1,5 @@
 import { inputChecker } from '../logic/inputcheck'
+import { sendItem } from '../logic/sendItem'
 import { removeGroup } from './removeGroup'
 
 function createGroupForm(){
@@ -73,6 +74,8 @@ function addInfo(){
 
 function createGroupArray(groupName){
     window[groupName]= new Array()
+    window[groupName].push('f','u','c')
+    sendItem(window[groupName])
 }
 
 class task{
