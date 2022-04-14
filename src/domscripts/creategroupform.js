@@ -76,7 +76,6 @@ function addInfo(){
 
 function createGroupArray(groupName){
     window[groupName]= new Array()
-    window[groupName]=({taskName: "complete chore",dateDue:"Nan",notes:"hso"})
     sendItem(window[groupName],groupName)
 }
 
@@ -152,4 +151,4 @@ function addTaskToGroup(groupName,task){
    array.push(task)
 }
 
-export { createGroupForm,closeGroupForm,addInfo,groupSelected }
+export { createGroupForm,closeGroupForm,addInfo,groupSelected,createGroupElement }

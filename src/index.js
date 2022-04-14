@@ -6,7 +6,7 @@ import { dateSelector } from './logic/duedate'
 import { addNotes } from './logic/addnote'
 import { inputChecker } from './logic/inputcheck'
 import { format,parseISO,subDays } from 'date-fns'
-import { createGroupForm, closeGroupForm } from './domscripts/creategroupform'
+import { createGroupForm, closeGroupForm, createGroupElement } from './domscripts/creategroupform'
 import { sendItem } from './logic/sendItem'
 import { groupSelected } from './domscripts/creategroupform'
 
@@ -94,13 +94,13 @@ function captureInfo(){
 
 let Task
 function createTask(groupSelected){
-    taskNumber=window[groupSelected].length+2
-    if(taskNumber==2){
-        taskNumber=1
-    }
+     taskNumber=window[groupSelected].length+1
      Task = new task(taskNumber,taskName,notes,duedate)
      window[groupSelected].push(Task)
-
+     let localArray=JSON.parse(localStorage.getItem(groupSelected))
+     localArray.push(Task)
+     console.log(localArray)
+     localStorage.setItem(groupSelected,JSON.stringify(localArray))
 }
 
 //<--------------on start functions here------------>
@@ -115,6 +115,9 @@ function pageLoad(){//gets groups from localstorage and creates new arrays
          let tasks=JSON.parse(localStorage.getItem(groupName))//to get tasks for particular group
          array.push(tasks)
          console.log(array)
+         createGroupElement(groupName)
      }  
 }
+
 pageLoad()
+
