@@ -1,3 +1,4 @@
+import { clearTaskElements, displayTasks } from '../logic/displaytasks'
 import { inputChecker } from '../logic/inputcheck'
 import { sendItem } from '../logic/sendItem'
 import { removeGroup } from './removeGroup'
@@ -25,6 +26,7 @@ function createGroupForm(){
     input.style.fontFamily="roboto condensed"
     input.style.backgroundColor="yellowgreen"
     input.style.transition="all 0.4s"
+    input.type="text"
     const dot=document.createElement('span')
     dot.classList.add('dot')
     dot.classList.add('title')
@@ -79,7 +81,7 @@ function createGroupArray(groupName){
     sendItem(window[groupName],groupName)
 }
 
-function createGroupElement(groupName){
+function createGroupElement(groupName){//creates new group element in sidebar
     const formContainer=document.querySelector('.sidebar')
     let container=document.createElement('div')
     container.classList.add('group-container')
@@ -122,6 +124,15 @@ function createGroupElement(groupName){
     createGroupArray(groupName)
     groupSelection()
     groupSelector()
+    let grpTitle=document.querySelectorAll('.title') //this step is neccessary to build task nodes when the group is selected
+    grpTitle.forEach(title =>{
+        title.addEventListener('click',()=>{
+               clearTaskElements()
+               let name=title.textContent
+               name=name.charAt(0).toLowerCase() + name.slice(1);
+               displayTasks(name)
+        })
+    })
 }
 let groupSelected
 function groupSelector(){//checks which group is currently selected

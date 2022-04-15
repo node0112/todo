@@ -9,6 +9,7 @@ import { format,parseISO,subDays } from 'date-fns'
 import { createGroupForm, closeGroupForm, createGroupElement } from './domscripts/creategroupform'
 import { sendItem } from './logic/sendItem'
 import { groupSelected } from './domscripts/creategroupform'
+import { clearTaskElements, displayTasks } from './logic/displaytasks'
 
 const taskForm=document.querySelector('.add-task-form')
 const newNoted=document.querySelector(".add-note-button")
@@ -68,7 +69,7 @@ addGroupBtn.addEventListener('click',()=>{
 
 
 function addTask(){
-    if (inputChecker('.task-name')==true){
+    if (inputChecker('.task-name')==true && groupSelected!=null){
     //extra animation effects
     taskForm.style.backgroundColor="#7dd777"
     taskForm.style.opacity="0"
@@ -94,13 +95,15 @@ function captureInfo(){
 
 let Task
 function createTask(groupSelected){
-     taskNumber=window[groupSelected].length+1
+     let array=window[groupSelected]
+     taskNumber=array.length+1
      Task = new task(taskNumber,taskName,notes,duedate)
-     window[groupSelected].push(Task)
-     let localArray=JSON.parse(localStorage.getItem(groupSelected))
-     localArray.push(Task)
+     array.push(Task)
+     console.log(array)
+     let localArray=JSON.parse(localStorage.getItem(groupSelected) || '[]2')//gets item from LS
+     localArray.push(Task)//push item to local array 
      console.log(localArray)
-     localStorage.setItem(groupSelected,JSON.stringify(localArray))
+     localStorage.setItem(groupSelected,JSON.stringify(localArray))//push updated array back to ls
 }
 
 //<--------------on start functions here------------>
@@ -108,16 +111,26 @@ function createTask(groupSelected){
 function pageLoad(){//gets groups from localstorage and creates new arrays
      let ln=localStorage.length
      let groupName
+     if(localStorage.getItem("user")==null){
+        localStorage.setItem("user",1)
+        localStorage.setItem("chores",JSON.stringify([{taskNumber: 1, taskName: "Eat Moulded Cheese", notes: "fd", duedate: "none"},{taskNumber: 2, taskName: "Give doggo food", notes: "fd", duedate: "none"},{taskNumber: 3, taskName: "Wash your face silly!", notes: "fd", duedate: "none"}])) // default array
+   }
      for(let i=0;i<ln;i++){
          groupName=localStorage.key(i)
-         console.log(groupName)
-         let array=window[groupName]=new Array()//create array for each group stored in local storge
+         groupName=groupName.toString()
+         if(groupName!="user"){
+         window[groupName]= new Array()  //create array for each group stored in local storge
+         let array=window[groupName]
+         console.log(array)
          let tasks=JSON.parse(localStorage.getItem(groupName))//to get tasks for particular group
+         console.log(tasks)
          array.push(tasks)
          console.log(array)
          createGroupElement(groupName)
+         }
      }  
 }
+
 
 pageLoad()
 
