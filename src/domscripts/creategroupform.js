@@ -76,9 +76,19 @@ function addInfo(){
     }, 500);
 }
 
-function createGroupArray(groupName){
-    window[groupName]= new Array()
-    sendItem(window[groupName],groupName)
+function createGroupArray(groupName){//to create local array to store tasks
+    let arr=window[groupName]= []
+    let tasks=JSON.parse(localStorage.getItem(groupName))
+    if(tasks==null){
+       localStorage.setItem(groupName,JSON.stringify(arr))
+    }
+    else{
+    for(let i=0;i<tasks.length;i++){
+        let task=tasks[i]
+        arr.push(task)
+    }
+    }
+    console.log(localStorage.getItem(groupName))
 }
 
 function createGroupElement(groupName){//creates new group element in sidebar

@@ -1,7 +1,10 @@
 function displayTasks(groupName){//function to clear tasks in view and create elements to show new tasks in group array
-    let array=window[groupName]
-    const ln=array.length
+    let arr= []
+    arr=JSON.parse(localStorage.getItem(groupName))
+    console.log(arr)
+    const ln=arr.length
     for(let i=0;i<ln;i++){
+        let array=arr[i]
         let name=array.taskName
         let number=array.taskNumber
         let note=array.notes
@@ -30,6 +33,7 @@ function createTaskElements(taskName,taskNumber,notes,duedate){//internal functi
     date.classList.add('date')
     done.classList.add('material-icons')
     done.classList.add('task-done-button')
+    done.textContent="done"
     done.style.fontSize="30px"
 
     //now we assign each task its values--->

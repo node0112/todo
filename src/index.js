@@ -76,6 +76,10 @@ function addTask(){
     captureInfo()
     setTimeout(() => {
         closeForm()
+        clearTaskElements()
+        displayTasks(groupSelected)
+        var elem = document.querySelector('.tasks-window');
+         elem.scrollTop = elem.scrollHeight;
     }, 800);
 }
 else if (inputChecker('.task-name')==false){
@@ -86,49 +90,52 @@ else if (inputChecker('.task-name')==false){
 function captureInfo(){
     taskName=document.querySelector('.task-name').value
     notes=document.querySelector('.notes-input').value
-    if(notes==''){
+    if(notes==null|| notes==""){
         notes="None"
     }
-    taskDate=document.querySelector('.date-selector').value
+    duedate=document.querySelector('.date-selector').value
     createTask(groupSelected)
 }
 
 let Task
 function createTask(groupSelected){
      let array=window[groupSelected]
-     taskNumber=array.length+1
+     taskNumber=(array.length+1).toString()
      Task = new task(taskNumber,taskName,notes,duedate)
      array.push(Task)
      console.log(array)
      let localArray=JSON.parse(localStorage.getItem(groupSelected) || '[]2')//gets item from LS
      localArray.push(Task)//push item to local array 
-     console.log(localArray)
      localStorage.setItem(groupSelected,JSON.stringify(localArray))//push updated array back to ls
+     console.log(localStorage.getItem(groupSelected))
 }
 
 //<--------------on start functions here------------>
 
 function pageLoad(){//gets groups from localstorage and creates new arrays
-     let ln=localStorage.length
-     let groupName
      if(localStorage.getItem("user")==null){
         localStorage.setItem("user",1)
         localStorage.setItem("chores",JSON.stringify([{taskNumber: 1, taskName: "Eat Moulded Cheese", notes: "fd", duedate: "none"},{taskNumber: 2, taskName: "Give doggo food", notes: "fd", duedate: "none"},{taskNumber: 3, taskName: "Wash your face silly!", notes: "fd", duedate: "none"}])) // default array
    }
-     for(let i=0;i<ln;i++){
-         groupName=localStorage.key(i)
-         groupName=groupName.toString()
-         if(groupName!="user"){
-         window[groupName]= new Array()  //create array for each group stored in local storge
-         let array=window[groupName]
-         console.log(array)
-         let tasks=JSON.parse(localStorage.getItem(groupName))//to get tasks for particular group
-         console.log(tasks)
-         array.push(tasks)
-         console.log(array)
-         createGroupElement(groupName)
-         }
-     }  
+     createGroupsStartup()
+}
+function createGroupsStartup(){
+    let ln=localStorage.length
+     let groupName
+    for(let i=ln-1;i>=0;i--){//loop runs in reverse so that latest group gets added last
+        groupName=localStorage.key(i)
+        console.log(localStorage.getItem(groupName))
+        if(groupName!="user"){
+        window[groupName]=JSON.parse(localStorage.getItem(groupName)) || [];  //create array for each group stored in local storge
+        let array=window[groupName]
+        console.log(array)
+        let tasks=localStorage.getItem(groupName)//to get tasks for particular group
+        tasks=JSON.parse(tasks)
+        array.push(tasks)
+        console.log(array)
+        createGroupElement(groupName)
+        }
+    }  
 }
 
 
