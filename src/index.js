@@ -5,7 +5,7 @@ import { cancelTask } from './logic/canceltask'
 import { dateSelector } from './logic/duedate'
 import { addNotes } from './logic/addnote'
 import { inputChecker } from './logic/inputcheck'
-import { format,parseISO,subDays } from 'date-fns'
+import { format,parseISO,set,subDays } from 'date-fns'
 import { createGroupForm, closeGroupForm, createGroupElement } from './domscripts/creategroupform'
 import { sendItem } from './logic/sendItem'
 import { groupSelected } from './domscripts/creategroupform'
@@ -18,6 +18,8 @@ const cancelTaskBtn=document.querySelector('.cancel-task')
 const addTaskBtn=document.querySelector('.add-task')
 const dueDateBtn=document.querySelector('.due-date-button')
 const newGroupLink=document.querySelector('.new-group-link')
+const reset=document.querySelector('.reset-button')
+const message=document.querySelector('.default-message')
 //input declarations
 let taskName
 let notes
@@ -28,18 +30,16 @@ let duedate
 
 
 
-class task{
-    constructor(taskNumber,taskName,notes,duedate){
-    this.taskNumber=taskNumber
-    this.taskName=taskName
-    this.notes=notes
-    this.duedate=duedate
-    this.status=false
-    }
-}
-
 newTaskBtn.addEventListener('click',()=>{
-   openNewForm()
+    if(groupSelected==null){
+        message.style.color="tomato"
+        setTimeout(() => {
+            message.style.color="gray"
+        }, 800);
+    }
+    else{
+       openNewForm()
+    }
 })
 
 dueDateBtn.addEventListener('click',()=>{
@@ -69,8 +69,26 @@ newGroupLink.addEventListener('click',()=>{
     createGroupForm()
 })
 
+reset.addEventListener('click',()=>{
+    if(confirm('Reset to Default? This will erase all your current groups ⚠.')==true){
+        reset.style.transform=('rotate(-90deg)')
+        setTimeout(() => { 
+        localStorage.clear()
+        location.reload()
+        }, 1000);
+    }
+})
 //<----------------Create new task Functions --------------->
 
+class task{//class constructor
+    constructor(taskNumber,taskName,notes,duedate){
+    this.taskNumber=taskNumber
+    this.taskName=taskName
+    this.notes=notes
+    this.duedate=duedate
+    this.status=false
+    }
+}
 
 function addTask(){
     if (inputChecker('.task-name')==true && groupSelected!=null){
@@ -136,7 +154,6 @@ function createGroupsStartup(){
         }
     }  
 }
-
 
 pageLoad()
 

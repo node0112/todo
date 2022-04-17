@@ -20,7 +20,7 @@ function createTaskElements(taskName,taskNumber,notes,duedate){//internal functi
     const tasksWindow=document.querySelector('.tasks-window')//main element fo rchild nodes to be appended to
     let taskContainer=document.createElement('div')
     taskContainer.classList.add('task-container')
-    taskContainer.classList.add(taskNumber)
+    taskContainer.setAttribute("id", taskNumber.toString());
 
     let number=document.createElement('div') //create task elements
     let name=document.createElement('div')
@@ -68,21 +68,28 @@ function createTaskElements(taskName,taskNumber,notes,duedate){//internal functi
 function deleteTask(number){//creates an array, deletes task, pushes array back to LS
     let key=window.group
     number=number-1
-    console.log(number)
     let arr=[]
     arr=JSON.parse(localStorage.getItem(key))
     arr.splice(number,1)
     updateTaskNumber(arr,number,key)
     localStorage.setItem(key,JSON.stringify(arr))
     console.log(JSON.parse(localStorage.getItem(key)))
-    displayTasks(group)
+    setTimeout(() => {
+        clearTaskElements() //clears current task elements
+        displayTasks(group) //displays new tasks with updated numbers
+    }, 500);
 }
 function updateTaskNumber(arr,number,group){// updates task numbers in array and also creates new tasks again in display
     let ln=arr.length
     for(let i=number;i<ln;i++){
         arr[i].taskNumber=i+1
     }
-    clearTaskElements() //clears current task elements
+    number=parseInt(number)+1
+    console.log(number)
+    let task=document.getElementById(number)
+    task.style.transition='all 0.7s'
+    task.style.backgroundColor='rgba(255, 0, 0, 0.595)'
+    task.style.opacity='0%'
 }
 
 function clearTaskElements(){
