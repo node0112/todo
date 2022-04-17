@@ -1,5 +1,5 @@
 import { clearTaskElements, displayTasks } from '../logic/displaytasks'
-import { inputChecker } from '../logic/inputcheck'
+import { groupInputChecker } from '../logic/inputcheck'
 import { sendItem } from '../logic/sendItem'
 import { removeGroup } from './removeGroup'
 
@@ -62,18 +62,19 @@ function closeGroupForm(){
 
 //functions to execute after add button has been pressed
 
-function addInfo(){
+function addInfo(){//captures info
     let input=document.querySelector('.group-name-input')
-    //if(inputChecker('.group-name-input')==true){
-      //  closeGroupForm()
-       // input.style.backgroundColor="#11ff00"
-    //}
-    closeGroupForm()
-    input.style.backgroundColor="#11ff00"
-    let groupName=input.value
-    setTimeout(() => {
-        createGroupElement(groupName)
-    }, 500);
+    if(groupInputChecker('.group-name-input')==true){
+        closeGroupForm()
+        input.style.backgroundColor="#11ff00"
+        let groupName=input.value.toLowerCase()
+        setTimeout(() => {
+            createGroupElement(groupName)
+        }, 500);
+    }
+    else{
+        alert("Only Alphabets are allowed without spaces (min 4 characters)!")
+    }
 }
 
 function createGroupArray(groupName){//to create local array to store tasks
@@ -136,6 +137,8 @@ function createGroupElement(groupName){//creates new group element in sidebar
     let grpTitle=document.querySelectorAll('.title') //this step is neccessary to build task nodes when the group is selected
     grpTitle.forEach(title =>{
         title.addEventListener('click',()=>{
+                const message=document.querySelector('.default-message')
+                message.classList.add('hidden')
                clearTaskElements()
                let name=title.textContent
                name=name.charAt(0).toLowerCase() + name.slice(1);

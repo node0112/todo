@@ -136,7 +136,8 @@ function pageLoad(){//gets groups from localstorage and creates new arrays
      if(localStorage.getItem("user")==null){
         localStorage.setItem("user",1)
         localStorage.setItem("chores",JSON.stringify([{taskNumber: 1, taskName: "Eat Moulded Cheese", notes: "This Div is Scrollable, try me!    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ", duedate: "None"},{taskNumber: 2, taskName: "Give doggo food", notes: "fd", duedate: "None"},{taskNumber: 3, taskName: "Wash your face silly!", notes: "fd", duedate: "None"},{taskNumber: 4, taskName: "Clean Fridge!", notes: "Clean The Insides too!", duedate: "None"},{taskNumber: 5, taskName: "Do the laundry!", notes: "Use the other detergent not that one", duedate: "None"},{taskNumber: 6, taskName: "Charge the Mac", notes: "Remeber to shut it down before leaving.", duedate: "None"},{taskNumber: 7, taskName: "Am I Scrollable?", notes: "I am too! Not a lot but Still!", duedate: "None"}])) // default array
-   }
+        localStorage.setItem("odin",JSON.stringify([{taskNumber: 1, taskName: "Complete To-Do Website's Logic", notes: "None", duedate: "" },{taskNumber: 2, taskName: "Clean Up Unused Scripts", notes: "Todo directory", duedate: "None" },{taskNumber: 3, taskName: "Learn Advanced Css", notes: "None", duedate: "∞" }]))
+    }
      createGroupsStartup()
 }
 function createGroupsStartup(){

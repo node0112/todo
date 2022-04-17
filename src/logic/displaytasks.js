@@ -2,7 +2,6 @@ function displayTasks(groupName){//function to clear tasks in view and create el
     let arr= []
     arr=JSON.parse(localStorage.getItem(groupName))
     const ln=arr.length
-    var group=groupName
     window.group=groupName
     for(let i=0;i<ln;i++){
         let array=arr[i]
@@ -58,13 +57,14 @@ function createTaskElements(taskName,taskNumber,notes,duedate){//internal functi
     tasksWindow.appendChild(taskContainer)
     
     done.addEventListener('click',()=>{
-        //function to remove task from array
-        //function to remove task from local storage
-        //add amount of tasks done for group and store in LS
+        window.choice="complete"// so that task turns green instead of red
+        deleteTask(taskNumber)
     })
-    remove.addEventListener('click',()=>{deleteTask(taskNumber)})// tasl number helps identify the task 
+    remove.addEventListener('click',()=>{
+        window.choice="remove"
+        deleteTask(taskNumber)
+    })// task number helps identify the task 
 }
-
 function deleteTask(number){//creates an array, deletes task, pushes array back to LS
     let key=window.group
     number=number-1
@@ -73,7 +73,6 @@ function deleteTask(number){//creates an array, deletes task, pushes array back 
     arr.splice(number,1)
     updateTaskNumber(arr,number,key)
     localStorage.setItem(key,JSON.stringify(arr))
-    console.log(JSON.parse(localStorage.getItem(key)))
     setTimeout(() => {
         clearTaskElements() //clears current task elements
         displayTasks(group) //displays new tasks with updated numbers
@@ -84,14 +83,21 @@ function updateTaskNumber(arr,number,group){// updates task numbers in array and
     for(let i=number;i<ln;i++){
         arr[i].taskNumber=i+1
     }
+    taskAnimate(number)
+}
+function taskAnimate(number){
     number=parseInt(number)+1
-    console.log(number)
     let task=document.getElementById(number)
     task.style.transition='all 0.7s'
-    task.style.backgroundColor='rgba(255, 0, 0, 0.595)'
     task.style.opacity='0%'
+    console.log(window.choice)
+    if(window.choice=="remove"){
+        task.style.backgroundColor='rgba(255, 0, 0, 0.595)'
+    }
+    else{
+        task.style.backgroundColor='green'
+    }
 }
-
 function clearTaskElements(){
     let taskElements=document.querySelectorAll('.task-container')
     taskElements.forEach(element=>{
