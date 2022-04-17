@@ -17,6 +17,7 @@ const newTaskBtn=document.querySelector('.add-task-button')
 const cancelTaskBtn=document.querySelector('.cancel-task')
 const addTaskBtn=document.querySelector('.add-task')
 const dueDateBtn=document.querySelector('.due-date-button')
+const newGroupLink=document.querySelector('.new-group-link')
 //input declarations
 let taskName
 let notes
@@ -33,6 +34,7 @@ class task{
     this.taskName=taskName
     this.notes=notes
     this.duedate=duedate
+    this.status=false
     }
 }
 
@@ -63,7 +65,9 @@ const addGroupBtn=document.querySelector('.add-group-btn')
 addGroupBtn.addEventListener('click',()=>{
     createGroupForm()
 })
-
+newGroupLink.addEventListener('click',()=>{
+    createGroupForm()
+})
 
 //<----------------Create new task Functions --------------->
 
@@ -103,11 +107,9 @@ function createTask(groupSelected){
      taskNumber=(array.length+1).toString()
      Task = new task(taskNumber,taskName,notes,duedate)
      array.push(Task)
-     console.log(array)
      let localArray=JSON.parse(localStorage.getItem(groupSelected) || '[]2')//gets item from LS
      localArray.push(Task)//push item to local array 
      localStorage.setItem(groupSelected,JSON.stringify(localArray))//push updated array back to ls
-     console.log(localStorage.getItem(groupSelected))
 }
 
 //<--------------on start functions here------------>
@@ -115,7 +117,7 @@ function createTask(groupSelected){
 function pageLoad(){//gets groups from localstorage and creates new arrays
      if(localStorage.getItem("user")==null){
         localStorage.setItem("user",1)
-        localStorage.setItem("chores",JSON.stringify([{taskNumber: 1, taskName: "Eat Moulded Cheese", notes: "fd", duedate: "none"},{taskNumber: 2, taskName: "Give doggo food", notes: "fd", duedate: "none"},{taskNumber: 3, taskName: "Wash your face silly!", notes: "fd", duedate: "none"}])) // default array
+        localStorage.setItem("chores",JSON.stringify([{taskNumber: 1, taskName: "Eat Moulded Cheese", notes: "This Div is Scrollable, try me!    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ", duedate: "None"},{taskNumber: 2, taskName: "Give doggo food", notes: "fd", duedate: "None"},{taskNumber: 3, taskName: "Wash your face silly!", notes: "fd", duedate: "None"},{taskNumber: 4, taskName: "Clean Fridge!", notes: "Clean The Insides too!", duedate: "None"},{taskNumber: 5, taskName: "Do the laundry!", notes: "Use the other detergent not that one", duedate: "None"},{taskNumber: 6, taskName: "Charge the Mac", notes: "Remeber to shut it down before leaving.", duedate: "None"},{taskNumber: 7, taskName: "Am I Scrollable?", notes: "I am too! Not a lot but Still!", duedate: "None"}])) // default array
    }
      createGroupsStartup()
 }
@@ -124,15 +126,12 @@ function createGroupsStartup(){
      let groupName
     for(let i=ln-1;i>=0;i--){//loop runs in reverse so that latest group gets added last
         groupName=localStorage.key(i)
-        console.log(localStorage.getItem(groupName))
         if(groupName!="user"){
         window[groupName]=JSON.parse(localStorage.getItem(groupName)) || [];  //create array for each group stored in local storge
         let array=window[groupName]
-        console.log(array)
         let tasks=localStorage.getItem(groupName)//to get tasks for particular group
         tasks=JSON.parse(tasks)
         array.push(tasks)
-        console.log(array)
         createGroupElement(groupName)
         }
     }  

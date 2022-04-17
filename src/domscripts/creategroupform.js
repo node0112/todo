@@ -88,7 +88,6 @@ function createGroupArray(groupName){//to create local array to store tasks
         arr.push(task)
     }
     }
-    console.log(localStorage.getItem(groupName))
 }
 
 function createGroupElement(groupName){//creates new group element in sidebar
