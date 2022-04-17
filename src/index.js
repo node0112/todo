@@ -7,7 +7,6 @@ import { addNotes } from './logic/addnote'
 import { inputChecker } from './logic/inputcheck'
 import { format,parseISO,set,subDays } from 'date-fns'
 import { createGroupForm, closeGroupForm, createGroupElement } from './domscripts/creategroupform'
-import { sendItem } from './logic/sendItem'
 import { groupSelected } from './domscripts/creategroupform'
 import { clearTaskElements, displayTasks } from './logic/displaytasks'
 
